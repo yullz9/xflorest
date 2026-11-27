@@ -9266,7 +9266,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 4950,
             triggerMaxX: 5400,
             dropOffX: 5505,
-            speed: 3.25
+            speed: 2.75
         };
 
         goalSpirit = { x: 6150, y: 465, radius: 28 };
@@ -9341,7 +9341,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5230,
             triggerMaxX: 5750,
             dropOffX: 5930,
-            speed: 3.45
+            speed: 2.85
         };
 
         goalSpirit = { x: 6620, y: 455, radius: 30 };
@@ -9423,7 +9423,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5350,
             triggerMaxX: 5950,
             dropOffX: 6150,
-            speed: 3.65
+            speed: 2.95
         };
 
         goalSpirit = { x: 6820, y: 455, radius: 32 };
@@ -9510,7 +9510,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5380,
             triggerMaxX: 6000,
             dropOffX: 6200,
-            speed: 3.7
+            speed: 3.0
         };
 
         goalSpirit = { x: 6880, y: 455, radius: 32 };
@@ -9696,7 +9696,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5540,
             triggerMaxX: 6100,
             dropOffX: 6200,
-            speed: 3.65
+            speed: 3.0
         };
 
         goalSpirit = { x: 6920, y: 455, radius: 32 };
@@ -9784,7 +9784,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5400,
             triggerMaxX: 6040,
             dropOffX: 6210,
-            speed: 3.7
+            speed: 3.05
         };
 
         goalSpirit = { x: 6920, y: 455, radius: 34 };
@@ -9880,7 +9880,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5420,
             triggerMaxX: 6060,
             dropOffX: 6240,
-            speed: 3.75
+            speed: 3.1
         };
 
         goalSpirit = { x: 6920, y: 455, radius: 34 };
@@ -9976,7 +9976,7 @@ function initWorld(fullReset = false) {
             triggerMinX: 5420,
             triggerMaxX: 6060,
             dropOffX: 6250,
-            speed: 3.8
+            speed: 3.15
         };
 
         goalSpirit = { x: 6920, y: 455, radius: 34 };
@@ -11658,7 +11658,7 @@ function updateGame(dt = 1) {
         const minX = boulder.triggerMinX || 4950;
         const maxX = boulder.triggerMaxX || 5400;
         const dropX = boulder.dropOffX || 5505;
-        const bSpeed = (boulder.speed || 3.25) * 1.15;
+        const bSpeed = Math.min(3.25, boulder.speed || 2.75);
 
         // Pastikan posisi Y batu mengikuti kontur permukaan bukit sebelum terjatuh ke jurang
         if (boulder.x <= dropX) {
@@ -11680,7 +11680,7 @@ function updateGame(dt = 1) {
         if (boulder.triggered) {
             boulder.vx = bSpeed;
             boulder.x += boulder.vx * dt;
-            boulder.angle += 0.09 * dt;
+            boulder.angle += (bSpeed / boulder.r) * dt;
 
             const bDist = Math.hypot((player.x + player.w / 2) - boulder.x, (player.y + player.h / 2) - boulder.y);
 
